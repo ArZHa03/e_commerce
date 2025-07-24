@@ -33,18 +33,22 @@ class CartController extends GetxController {
 
   void _decreaseQuantity(int index) {
     if (_carts[index].quantity > 1) _carts[index].quantity--;
+    _totalPrice.value = _carts.fold(0, (sum, item) => sum + (item.price * item.quantity));
     _carts.refresh();
     _mediator.getMediatorData().setCarts(_carts.map((e) => e.toJson()).toList());
   }
 
   void _increaseQuantity(int index) {
     _carts[index].quantity++;
+    _totalPrice.value = _carts.fold(0, (sum, item) => sum + (item.price * item.quantity));
     _carts.refresh();
     _mediator.getMediatorData().setCarts(_carts.map((e) => e.toJson()).toList());
   }
 
   void _removeItem(int index) {
     _carts.removeAt(index);
+    _totalPrice.value = _carts.fold(0, (sum, item) => sum + (item.price * item.quantity));
+    _carts.refresh();
     _mediator.getMediatorData().setCarts(_carts.map((e) => e.toJson()).toList());
   }
 
@@ -63,7 +67,10 @@ class CartController extends GetxController {
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  TextField(decoration: InputDecoration(labelText: 'Nama'), onChanged: (value) => _user['name'] = value),
+                  TextField(
+                    decoration: InputDecoration(labelText: 'Nama'),
+                    onChanged: (value) => _user['name'] = value,
+                  ),
                   TextField(
                     decoration: InputDecoration(labelText: 'Alamat'),
                     onChanged: (value) => _user['address'] = value,
@@ -125,14 +132,13 @@ class CartController extends GetxController {
   }
 
   void _contactWhatsapp() {
-    final msgBuffer =
-        StringBuffer()
-          ..writeln('*Pemesanan dari:*')
-          ..writeln('*Nama:* ${_user['name']}')
-          ..writeln('*Alamat:* ${_user['address']}\n')
-          ..writeln('*Rincian:*')
-          ..writeAll(_carts.map((c) => '- ${c.name} x${c.quantity} (Rp ${_formatPrice(c.price * c.quantity)})\n'))
-          ..writeln('\n*Total:* Rp ${_formatPrice(_totalPrice.value)}');
+    final msgBuffer = StringBuffer()
+      ..writeln('*Pemesanan dari:*')
+      ..writeln('*Nama:* ${_user['name']}')
+      ..writeln('*Alamat:* ${_user['address']}\n')
+      ..writeln('*Rincian:*')
+      ..writeAll(_carts.map((c) => '- ${c.name} x${c.quantity} (Rp ${_formatPrice(c.price * c.quantity)})\n'))
+      ..writeln('\n*Total:* Rp ${_formatPrice(_totalPrice.value)}');
 
     final message = Uri.encodeComponent(msgBuffer.toString());
     final url = 'https://wa.me/${_paymentInfo['whatsapp_number']}?text=$message';

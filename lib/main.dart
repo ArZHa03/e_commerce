@@ -18,6 +18,7 @@ class _ECommerceApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SimpleResponsive.init(context);
     return GetMaterialApp(
+      title: 'E-Commerce App',
       initialRoute: Mediator.initialRoute,
       getPages: Mediator.routes,
       unknownRoute: Mediator.unknownRoute,

@@ -1,11 +1,11 @@
 {
-    "name": "e_commerce",
-    "short_name": "e_commerce",
+    "name": "E-Commerce App",
+    "short_name": "E-Commerce App",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "A simple, fast, responsive, modern e-commerce application",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

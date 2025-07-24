@@ -46,7 +46,7 @@ class _CartView extends StatelessWidget {
                 IconButton(
                   icon: Icon(Icons.copy),
                   onPressed: () {
-                    Clipboard.setData(ClipboardData(text: controller._formatPrice(controller._totalPrice.value)));
+                    Clipboard.setData(ClipboardData(text: controller._totalPrice.value.toString()));
                     Get.snackbar('Disalin', 'Total harga disalin');
                   },
                 ),

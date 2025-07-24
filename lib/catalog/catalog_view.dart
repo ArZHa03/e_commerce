@@ -46,6 +46,10 @@ class _CatalogView extends StatelessWidget {
                           width: 120,
                           fit: BoxFit.cover,
                           errorBuilder: (context, error, stackTrace) => const Icon(Icons.broken_image, size: 120, color: Colors.grey),
+                          loadingBuilder: (context, child, loadingProgress) {
+                            if (loadingProgress == null) return child;
+                            return Center(child: CircularProgressIndicator());
+                          },
                         ),
                       ),
                       const SizedBox(width: 12),

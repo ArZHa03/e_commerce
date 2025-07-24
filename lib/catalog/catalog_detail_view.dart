@@ -21,7 +21,16 @@ class _CatalogDetailView extends StatelessWidget {
             FlutterCarousel(
               items:
                   _controller._catalogSelected.value?.imagesUrl
-                      .map((item) => Image.network(item, errorBuilder: (context, error, stackTrace) => Icon(Icons.broken_image, size: 64)))
+                      .map(
+                        (item) => Image.network(
+                          item,
+                          errorBuilder: (context, error, stackTrace) => Icon(Icons.broken_image, size: 64),
+                          loadingBuilder: (context, child, loadingProgress) {
+                            if (loadingProgress == null) return child;
+                            return Center(child: CircularProgressIndicator());
+                          },
+                        ),
+                      )
                       .toList(),
               options: FlutterCarouselOptions(
                 height: 70.hp,

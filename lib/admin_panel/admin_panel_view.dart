@@ -65,6 +65,10 @@ class _AdminPanelView extends StatelessWidget {
                       child: Image.network(
                         item.thumbnail,
                         errorBuilder: (context, error, stackTrace) => const Icon(Icons.broken_image, size: 80),
+                        loadingBuilder: (context, child, loadingProgress) {
+                          if (loadingProgress == null) return child;
+                          return Center(child: CircularProgressIndicator());
+                        },
                       ),
                     ),
                   ),
@@ -149,7 +153,17 @@ class _AdminPanelView extends StatelessWidget {
                             : _controller._selectedImages.map((image) {
                               return Stack(
                                 children: [
-                                  Image.network(image.path, width: 100, height: 100, fit: BoxFit.cover),
+                                  Image.network(
+                                    image.path,
+                                    width: 100,
+                                    height: 100,
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (context, error, stackTrace) => const Icon(Icons.broken_image, size: 100),
+                                    loadingBuilder: (context, child, loadingProgress) {
+                                      if (loadingProgress == null) return child;
+                                      return Center(child: CircularProgressIndicator());
+                                    },
+                                  ),
                                   Positioned(
                                     right: 0,
                                     top: 0,

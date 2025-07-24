@@ -96,7 +96,17 @@ class _CartView extends StatelessWidget {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Image.network(item.thumbnail, width: 60, height: 60, fit: BoxFit.cover),
+                          Image.network(
+                            item.thumbnail,
+                            height: 60,
+                            width: 60,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) => Icon(Icons.image_not_supported, size: 60),
+                            loadingBuilder: (context, child, loadingProgress) {
+                              if (loadingProgress == null) return child;
+                              return Center(child: CircularProgressIndicator());
+                            },
+                          ),
                           const SizedBox(width: 12),
                           Expanded(
                             child: Column(

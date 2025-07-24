@@ -1,0 +1,28 @@
+name: e_commerce
+description: "An E-Commerce Flutter project."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  simple_responsive: ^1.0.1
+  lite_storage: ^1.0.0
+  get: ^4.7.2
+  cloudinary_public: ^0.23.1
+  image_picker: ^1.1.2
+  firebase_core: ^3.14.0
+  cloud_firestore: ^5.6.9
+  flutter_carousel_widget: ^3.1.0
+  currency_text_input_formatter: ^2.2.9
+  url_launcher: ^6.3.2
+
+dev_dependencies:
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
